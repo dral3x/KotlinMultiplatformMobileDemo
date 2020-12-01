@@ -1,11 +1,10 @@
-package com.spreaker.kmm.shared.data.repository
+package com.spreaker.kmm.shared.domain.repositories
 
 import com.badoo.reaktive.single.SingleWrapper
 import com.badoo.reaktive.single.wrap
 import com.spreaker.kmm.shared.domain.models.Message
-import com.spreaker.kmm.shared.domain.repositories.MessageRepository
-import com.spreaker.kmm.shared.framework.FlowWrapper
-import com.spreaker.kmm.shared.framework.SuspendWrapper
+import com.spreaker.kmm.shared.data.FlowWrapper
+import com.spreaker.kmm.shared.data.SuspendWrapper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

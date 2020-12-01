@@ -20,7 +20,7 @@ sudo ./colorsetup-xcode11.sh
 
 Sort of *"Clean Architecture"*
 
-5 main layers: Presentation, UseCase, Domain, Data and Framework
+3 main layers: Presentation, Domain, and Data
 
 ## Presentation (or UI) layer
 
@@ -34,31 +34,26 @@ Examples of classes:
 
 Pattern: MVVM, MVP or MVC?
 
-## UseCase layer
-
-It contains mainly the actions that the user can trigger. It simplify access to the domain layer, forwarding actions down-layer and exposing data up-layer.
-
-It's stateless.
-
 ## Domain layer
 
-Also known as business logic. This layer has the rules of your business.
+Also known as business logic. This layer has the rules of our business.
 
-It might manager some business state.
+It might manage some state, even persist it.
 
 Examples of classes:
 - data models
 - managers
+- repository
 
 ## Data layer
 
-In this layer, you have an abstract definition of the different data sources, and how they should be used.
-
-Usually should contains repositories that hide the actual source of the data.
-
-## Framework
+In this layer, you have definitions of the different data sources.
 
 It basically encapsulates the interaction with the underlying platform (iOS or Android) or services/libraries (networking library, database, Firebase, etc), so that the rest of the code can be agnostic and reusable.
+
+Examples of classes:
+- HTTP client
+- database
 
 
 

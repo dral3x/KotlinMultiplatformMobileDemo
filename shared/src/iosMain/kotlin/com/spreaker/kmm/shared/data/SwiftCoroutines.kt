@@ -1,4 +1,4 @@
-package com.spreaker.kmm.shared.framework
+package com.spreaker.kmm.shared.data
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*

@@ -1,4 +1,4 @@
-package com.spreaker.kmm.shared.data.repositories
+package com.spreaker.kmm.shared.domain.repositories
 
 import com.badoo.reaktive.single.Single
 import com.badoo.reaktive.single.single
