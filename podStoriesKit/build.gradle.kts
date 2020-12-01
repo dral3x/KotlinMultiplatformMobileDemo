@@ -33,6 +33,10 @@ kotlin {
                 implementation(Deps.Serialization.json)
                 implementation(Deps.Coroutines.core)
 
+                // Rx
+                implementation(Deps.Reaktive.core)
+                implementation(Deps.Reaktive.annotations)
+
                 // HTTP
                 implementation(Deps.Ktor.core)
                 implementation(Deps.Ktor.serialization)
@@ -69,6 +73,9 @@ kotlin {
                 // HTTP
                 implementation(Deps.Ktor.ios)
                 implementation(Deps.Ktor.Logging.native)
+
+                // Crash reporting
+                api("co.touchlab:crashkios:0.3.0")
             }
         }
         val iosTest by getting

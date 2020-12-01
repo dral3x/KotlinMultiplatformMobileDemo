@@ -14,6 +14,9 @@ buildscript {
 group = "com.spreaker.podstories"
 version = "1.0-SNAPSHOT"
 
-repositories {
-    mavenCentral()
+allprojects {
+    repositories {
+        mavenCentral()
+        maven("https://dl.bintray.com/badoo/maven")
+    }
 }

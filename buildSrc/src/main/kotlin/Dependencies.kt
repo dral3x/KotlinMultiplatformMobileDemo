@@ -1,7 +1,8 @@
 object Versions {
-    const val serialization = "1.0.1"
     const val coroutines = "1.4.2-native-mt"
     const val ktor = "1.4.1"
+    const val serialization = "1.0.1"
+    const val reaktive = "1.1.18"
 }
 
 object Deps {
@@ -27,6 +28,11 @@ object Deps {
             const val jvm       = "io.ktor:ktor-client-logging-jvm:${Versions.ktor}"
             const val native    = "io.ktor:ktor-client-logging-native:1.3.1" //TODO to upgrade
         }
+    }
+
+    object Reaktive {
+        const val core          = "com.badoo.reaktive:reaktive:${Versions.reaktive}"
+        const val annotations   = "com.badoo.reaktive:reaktive-annotations:${Versions.reaktive}"
     }
 
 }

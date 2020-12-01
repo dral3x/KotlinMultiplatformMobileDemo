@@ -1,5 +1,8 @@
 package com.spreaker.podstories.podStoriesKit.data.repository
 
+import com.badoo.reaktive.single.SingleWrapper
+import com.badoo.reaktive.single.wrap
+import com.spreaker.podstories.podStoriesKit.domain.models.Message
 import com.spreaker.podstories.podStoriesKit.domain.repositories.MessageRepository
 import com.spreaker.podstories.podStoriesKit.framework.FlowWrapper
 import com.spreaker.podstories.podStoriesKit.framework.SuspendWrapper
@@ -24,4 +27,7 @@ class MessageRepositoryIos(private val repository: MessageRepository) {
     fun getMessagesInRoomSuspended(roomId: Int) = SuspendWrapper { repository.getMessagesInRoom(roomId) }
 
     fun getMessagesInRoomFlow(roomId: Int) = FlowWrapper(repository.getMessagesInRoomFlow(roomId))
+
+    fun getMessagesInRoomRx(roomId: Int): SingleWrapper<List<Message>> =
+        repository.getMessagesInRoomRx(roomId).wrap()
 }

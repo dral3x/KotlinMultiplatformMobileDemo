@@ -19,9 +19,11 @@ class RoomViewModel: ObservableObject {
     private var disposables = DisposeBag()
     
     func startObserving() {
-        let repository = MessageRepositoryIos(repository: MessageRepositoryImpl(client: ApiClientBuilder().defaultHttpClient()))
+        let repo: MessageRepository = MessageRepositoryImpl(client: ApiClientBuilder().defaultHttpClient())
+        let repository = MessageRepositoryIos(repository: repo)
         
         // Combine
+        /*
 //        createDeferred(
 //            scope: repository.scope,
 //            suspendWrapper: repository.getMessagesInRoomSuspended(roomId: 18631166)
@@ -40,6 +42,7 @@ class RoomViewModel: ObservableObject {
             
         })
         .store(in: &cancellables)
+        */
         
         // RxSwift
         /*
@@ -64,6 +67,17 @@ class RoomViewModel: ObservableObject {
         )
         .disposed(by: self.disposables)
         */
+        
+        // Reaktive
+        let disposable = repository.getMessagesInRoomRx(roomId: 18631166)
+            .subscribe(
+                isThreadLocal: true,
+                onError: { error in
+                    NSLog("error: \(error)")
+                },
+                onSuccess: { (messages) in
+                    NSLog("success: \(messages)")
+                })
     }
     
     func stopObserving() {

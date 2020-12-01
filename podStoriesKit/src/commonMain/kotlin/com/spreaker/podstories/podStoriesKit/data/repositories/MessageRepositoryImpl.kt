@@ -1,5 +1,7 @@
 package com.spreaker.podstories.podStoriesKit.data.repositories
 
+import com.badoo.reaktive.single.Single
+import com.badoo.reaktive.single.single
 import com.spreaker.podstories.podStoriesKit.domain.api.ApiPager
 import com.spreaker.podstories.podStoriesKit.domain.api.ApiResponse
 import com.spreaker.podstories.podStoriesKit.domain.models.Message
@@ -10,8 +12,9 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
 
 class MessageRepositoryImpl(private val client: HttpClient): MessageRepository {
@@ -69,6 +72,35 @@ class MessageRepositoryImpl(private val client: HttpClient): MessageRepository {
         } else {
             // Parse error
             error("Not good!")
+        }
+    }
+
+    override fun getMessagesInRoomRx(roomId: Int): Single<List<Message>> = single { emitter ->
+        runBlocking {
+            val response = client.request<HttpResponse> {
+                url {
+                    method = HttpMethod.Get
+                    protocol = URLProtocol.HTTPS
+                    host = "api.spreaker.com"
+                    encodedPath = "/v2/episodes/$roomId/messages"
+                }
+                headers {
+                    append("User-Agent", "Spreaker Test App KMM")
+                }
+            }
+
+            if (response.status == HttpStatusCode.OK) {
+                // Parse success
+                val h = response.headers
+
+                val apiResponse = Json { ignoreUnknownKeys = true }
+                    .decodeFromString<ApiResponse<ApiPager<Message>>>(response.readText())
+
+                emitter.onSuccess(apiResponse.response.items)
+            } else {
+                // Parse error
+                emitter.onError(IllegalStateException("Not good!"))
+            }
         }
     }
 }

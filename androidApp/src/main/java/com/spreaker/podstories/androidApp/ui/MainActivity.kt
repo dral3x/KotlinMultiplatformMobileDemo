@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val model: RoomViewModel by viewModels { ViewModelFactory.getInstance() }
         model.getAllMessages(42).observe(this, Observer<List<Message>> { messages ->
-            //TODO update UI
+            // Update UI
             tv.text = messages[0].toString()
         })
     }

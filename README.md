@@ -9,33 +9,44 @@
 
 # Code architecture
 
-Sort of *"MVVM with Clean Architecture"*
+Sort of *"Clean Architecture"*
 
-3 main layers: Presentation, Domain, Data
+5 main layers: Presentation, UseCase, Domain, Data and Framework
 
-## Presentation layer
+## Presentation (or UI) layer
 
-It contains:
-- UI code
+It’s the layer that interacts with the UI. Very platform dependent.
 
-Examples:
-- iOS: ViewController, View, any UIControl, theming, ViewModel
-- Android: Activity, Fragment, theming, ViewModel
+It manage the state of the UI.
+
+Examples of classes:
+- iOS: ViewController, View, any UIControl, ViewModel
+- Android: Activity, Fragment, Presenter, ViewModel
+
+Pattern: MVVM, MVP or MVC?
+
+## UseCase layer
+
+It contains mainly the actions that the user can trigger. It simplify access to the domain layer, forwarding actions down-layer and exposing data up-layer.
+
+It's stateless.
 
 ## Domain layer
 
-It contains:
+Also known as business logic. This layer has the rules of your business.
+
+It might manager some business state.
+
+Examples of classes:
+- data models
 - managers
-- repositories
-- data models (Show, Episode, User, etc)
 
 ## Data layer
 
-It contains:
-- http client
-- database
+In this layer, you have an abstract definition of the different data sources, and how they should be used.
 
-# Services to integrate
+Usually should contains repositories that hide the actual source of the data.
 
-- Logging (local + remote)
-- Firebase (crash reporting, push notifications)
+## Framework
+
+It basically encapsulates the interaction with the underlying platform (iOS or Android) or services/libraries (networking library, database, Firebase, etc), so that the rest of the code can be agnostic and reusable.

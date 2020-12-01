@@ -23,7 +23,13 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.1.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    // Coroutine
+    implementation(Deps.Coroutines.core)
+
+    // Rx
+    implementation(Deps.Reaktive.core)
+
+    // HTTP
     implementation(Deps.Ktor.android)
 }
 
