@@ -14,7 +14,7 @@ class MessageRepositoryIos(private val repository: MessageRepository) {
 
     val scope: CoroutineScope = object : CoroutineScope {
         override val coroutineContext: CoroutineContext
-            get() = SupervisorJob() + Dispatchers.Main
+            get() = SupervisorJob() + Dispatchers.Default
     }
 
     init {
