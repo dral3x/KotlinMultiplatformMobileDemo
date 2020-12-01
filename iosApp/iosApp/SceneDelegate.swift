@@ -22,10 +22,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
-        
-        ApiClient().getEpisodeMessages(episodeId: 18631166) { (response, error) in
-            print("\(response)")
-        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

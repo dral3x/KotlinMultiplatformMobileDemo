@@ -5,7 +5,7 @@
       location = "group:iosApp.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:podStoriesKit">
+      location = "group:../podStoriesKit">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

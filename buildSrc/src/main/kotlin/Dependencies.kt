@@ -1,16 +1,18 @@
 object Versions {
     const val serialization = "1.0.1"
-    const val coroutines = "1.4.2"
+    const val coroutines = "1.4.2-native-mt"
     const val ktor = "1.4.1"
 }
 
 object Deps {
 
     object Coroutines {
+        // https://github.com/Kotlin/kotlinx.coroutines
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     }
 
     object Serialization {
+        // https://github.com/Kotlin/kotlinx.serialization
         const val json = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}"
     }
 

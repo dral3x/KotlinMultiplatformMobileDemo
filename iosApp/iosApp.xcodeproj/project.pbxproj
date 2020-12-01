@@ -17,6 +17,7 @@
 		7555FF96242A565B00829871 /* iosAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF95242A565B00829871 /* iosAppTests.swift */; };
 		7555FFA1242A565B00829871 /* iosAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FFA0242A565B00829871 /* iosAppUITests.swift */; };
 		FA1F869B25713CAE00CADAB3 /* RoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F869A25713CAE00CADAB3 /* RoomViewModel.swift */; };
+		FA731242257651F500991CB7 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA731241257651F500991CB7 /* Injection.swift */; };
 		FA9C4FD22575502100C78D6B /* RxWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9C4FD12575502100C78D6B /* RxWrappers.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		7555FFA0242A565B00829871 /* iosAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppUITests.swift; sourceTree = "<group>"; };
 		7555FFA2242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA1F869A25713CAE00CADAB3 /* RoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewModel.swift; sourceTree = "<group>"; };
+		FA731241257651F500991CB7 /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
 		FA9C4FD12575502100C78D6B /* RxWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxWrappers.swift; sourceTree = "<group>"; };
 		FD669AEF7058B8CAFAC936E2 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +130,7 @@
 				7555FF89242A565B00829871 /* LaunchScreen.storyboard */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				7555FF86242A565B00829871 /* Preview Content */,
+				FA731241257651F500991CB7 /* Injection.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				7555FF7F242A565900829871 /* AppDelegate.swift in Sources */,
 				FA9C4FD22575502100C78D6B /* RxWrappers.swift in Sources */,
 				7555FF81242A565900829871 /* SceneDelegate.swift in Sources */,
+				FA731242257651F500991CB7 /* Injection.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				FA1F869B25713CAE00CADAB3 /* RoomViewModel.swift in Sources */,
 			);

@@ -1,14 +1,20 @@
 import SwiftUI
 import podStoriesKit
 
-func greet() -> String {
-    return Greeting().greeting()
-}
-
 struct ContentView: View {
+    
+    @ObservedObject var viewModel: RoomViewModel = RoomViewModel()
+
     var body: some View {
-        Text(greet())
+        Text(viewModel.text)
+            .onAppear {
+                self.viewModel.startObserving()
+            }
+            .onDisappear {
+                self.viewModel.stopObserving()
+            }
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
