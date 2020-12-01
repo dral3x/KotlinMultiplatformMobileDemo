@@ -5,5 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface MessageRepository {
     @Throws(Exception::class)
-    suspend fun getMessagesInRoom(roomId: Int): Flow<List<Message>>
+    suspend fun getMessagesInRoom(roomId: Int): List<Message>
+
+    @Throws(Exception::class)
+    fun getMessagesInRoomFlow(roomId: Int): Flow<List<Message>>
 }

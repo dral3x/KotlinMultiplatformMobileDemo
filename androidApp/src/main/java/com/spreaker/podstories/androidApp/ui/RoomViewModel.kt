@@ -33,7 +33,7 @@ class RoomViewModel(
         //TODO
 
         viewModelScope.launch(Dispatchers.Main) {
-            val result = repository.getMessagesInRoom(18631166).singleOrNull()
+            val result = repository.getMessagesInRoomFlow(18631166).singleOrNull()
             messages.value = result
             Log.i("RoomViewModel", result.toString())
         }
