@@ -1,0 +1,48 @@
+use_frameworks!
+platform :ios, '13.0'
+
+target 'iosApp' do
+  # App dependencies
+  pod 'RxSwift', '5.1.1'
+
+  # Shared library
+  pod 'podStoriesKit', :path => '../podStoriesKit'
+end
+
+
+#
+# Final post install actions
+#
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+
+            # Common settings
+            config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET' # Remove each dependency's override
+
+            # DEBUG only settings
+            if config.name.include?('Debug')
+
+                # Set optimization level for target
+                config.build_settings['GCC_OPTIMIZATION_LEVEL'] = '0'
+                config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Onone'
+                config.build_settings['SWIFT_ACTIVE_COMPILATION_CONDITIONS'] = 'DEBUG'
+                config.build_settings['SWIFT_COMPILATION_MODE'] = 'singlefile' # incremental
+
+                # Build only for valid (active) architectures
+                config.build_settings['ONLY_ACTIVE_ARCH'] = 'YES'
+
+                # Do not strip out debug symbols
+                config.build_settings['COPY_PHASE_STRIP'] = 'NO'
+
+                # Do not generate dSYM
+                config.build_settings['DEBUG_INFORMATION_FORMAT'] = 'dwarf'
+
+                # Add DEBUG prepprocessor macro
+                config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)', 'DEBUG=1']
+                config.build_settings['OTHER_SWIFT_FLAGS'] ||= ['$(inherited)', '-DDEBUG']
+            end
+        end
+    end
+end

@@ -1,5 +1,6 @@
 import UIKit
 import SwiftUI
+import podStoriesKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -20,6 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window
             window.makeKeyAndVisible()
+        }
+        
+        ApiClient().getEpisodeMessages(episodeId: 18631166) { (response, error) in
+            print("\(response)")
         }
     }
 

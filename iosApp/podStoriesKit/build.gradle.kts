@@ -1,0 +1,108 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
+plugins {
+    kotlin("multiplatform")
+    kotlin("plugin.serialization") version "1.4.10"
+    id("com.android.library")
+    id("org.jetbrains.kotlin.native.cocoapods")
+}
+group = "com.spreaker.podstories"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    gradlePluginPortal()
+    google()
+    jcenter()
+    mavenCentral()
+}
+
+kotlin {
+    android()
+    ios()
+
+    cocoapods {
+        // Configure fields required by CocoaPods.
+        summary = "Some description for a Kotlin/Native module"
+        homepage = "Link to a Kotlin/Native module homepage"
+    }
+
+    sourceSets {
+
+        val commonMain by getting {
+            dependencies {
+                implementation(Deps.Serialization.json)
+                //implementation(Deps.Coroutines.core)
+
+                // HTTP
+                implementation(Deps.Ktor.core)
+                implementation(Deps.Ktor.serialization)
+                implementation(Deps.Ktor.Logging.common)
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
+            }
+        }
+
+        // Android specific
+        val androidMain by getting {
+            dependencies {
+
+                // HTTP
+                implementation(Deps.Ktor.android)
+                implementation(Deps.Ktor.Logging.jvm)
+            }
+        }
+        val androidTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+                implementation("junit:junit:4.12")
+            }
+        }
+
+        // iOS specific
+        val iosMain by getting {
+            dependencies {
+
+                // HTTP
+                implementation(Deps.Ktor.ios)
+                implementation(Deps.Ktor.Logging.native)
+            }
+        }
+        val iosTest by getting
+    }
+}
+
+android {
+    compileSdkVersion(29)
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdkVersion(24)
+        targetSdkVersion(29)
+        versionCode = 1
+        versionName = "1.0"
+    }
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+        }
+    }
+}
+
+/*
+val packForXcode by tasks.creating(Sync::class) {
+    group = "build"
+    val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
+    val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"
+    val targetName = "ios" + if (sdkName.startsWith("iphoneos")) "Arm64" else "X64"
+    val framework = kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
+    inputs.property("mode", mode)
+    dependsOn(framework.linkTask)
+    val targetDir = File(buildDir, "xcode-frameworks")
+    from({ framework.outputDirectory })
+    into(targetDir)
+}
+tasks.getByName("build").dependsOn(packForXcode)
+*/
