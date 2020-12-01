@@ -56,4 +56,22 @@ Examples of classes:
 - database
 
 
+# Useful Links
 
+## Documentation and blogposts
+- https://kotlinlang.org/docs/mobile/home.html
+- https://dev.to/kuuurt/maximizing-code-sharing-between-android-and-ios-with-kotlin-multiplatform-54h8
+
+## Dependencies
+- https://github.com/touchlab/xcode-kotlin
+- https://github.com/touchlab/CrashKiOS
+- https://github.com/touchlab/Stately
+- https://github.com/Kotlin/kotlinx.serialization
+- https://github.com/badoo/Reaktive
+- https://ktor.io/docs/quickstart-index.html
+
+## Other projects
+- https://github.com/touchlab/DroidconKotlin
+- https://github.com/prof18/MoneyFlow
+- https://github.com/Drjacky/TMDbMultiplatform
+- https://github.com/kuuuurt/jokes-app-multiplatform
