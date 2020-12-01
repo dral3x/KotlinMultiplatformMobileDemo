@@ -1,23 +1,23 @@
 PODS:
-  - podStoriesKit (1.0-SNAPSHOT)
   - RxSwift (5.1.1)
+  - shared (1.0-SNAPSHOT)
 
 DEPENDENCIES:
-  - podStoriesKit (from `../podStoriesKit`)
   - RxSwift (= 5.1.1)
+  - shared (from `../shared`)
 
 SPEC REPOS:
   trunk:
     - RxSwift
 
 EXTERNAL SOURCES:
-  podStoriesKit:
-    :path: "../podStoriesKit"
+  shared:
+    :path: "../shared"
 
 SPEC CHECKSUMS:
-  podStoriesKit: fe07946caccf20f4754bf1fa28680d83e7215fec
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  shared: 29dfedbb31933bfd37329a097a7cac41689a1b21
 
-PODFILE CHECKSUM: 0251b128a013f106f32ea07470f74fdd114c741d
+PODFILE CHECKSUM: e8777cfbd8936ae80d3254340b9c787e85008e29
 
 COCOAPODS: 1.10.0

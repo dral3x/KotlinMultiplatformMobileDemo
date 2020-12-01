@@ -8,7 +8,7 @@
 
 import Foundation
 import RxSwift
-import podStoriesKit
+import shared
 
 func createSingle<T>(
     scope: Kotlinx_coroutines_coreCoroutineScope,

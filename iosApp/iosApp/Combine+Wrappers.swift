@@ -8,7 +8,7 @@
 
 import Foundation
 import Combine
-import podStoriesKit
+import shared
 
 class KotlinError: LocalizedError {
     let throwable: KotlinThrowable

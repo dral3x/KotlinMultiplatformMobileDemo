@@ -1,8 +1,17 @@
-# Experiment for PodStories app
+# Experiment with Kotlin Multiplatform Mobile
+
+# iOS setup
+
+```
+git clone git@github.com:touchlab/xcode-kotlin.git
+xd xcode-kotlin
+./setup-xcode11.sh
+sudo ./colorsetup-xcode11.sh
+```
 
 # Project architecture
 
-- Kotlin Multiplaform project, with
+- KMM project, with
     - iOS app
     - Android app
     - Shared library 
@@ -50,3 +59,6 @@ Usually should contains repositories that hide the actual source of the data.
 ## Framework
 
 It basically encapsulates the interaction with the underlying platform (iOS or Android) or services/libraries (networking library, database, Firebase, etc), so that the rest of the code can be agnostic and reusable.
+
+
+

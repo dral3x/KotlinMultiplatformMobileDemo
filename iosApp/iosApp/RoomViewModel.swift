@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 import RxSwift
-import podStoriesKit
+import shared
 
 class RoomViewModel: ObservableObject {
     
@@ -22,16 +22,16 @@ class RoomViewModel: ObservableObject {
         let repo: MessageRepository = MessageRepositoryImpl(client: ApiClientBuilder().defaultHttpClient())
         let repository = MessageRepositoryIos(repository: repo)
         
-        // Combine
-        /*
-//        createDeferred(
-//            scope: repository.scope,
-//            suspendWrapper: repository.getMessagesInRoomSuspended(roomId: 18631166)
-//        )
-        createPublisher(
+
+        // Coroutine vs Combine - IncorrectDereferenceException
+        createDeferred(
             scope: repository.scope,
-            flowWrapper: repository.getMessagesInRoomFlow(roomId: 18631166)
+            suspendWrapper: repository.getMessagesInRoomSuspended(roomId: 18631166)
         )
+//        createPublisher(
+//            scope: repository.scope,
+//            flowWrapper: repository.getMessagesInRoomFlow(roomId: 18631166)
+//        )
         .sink(receiveCompletion: { (event) in
             
             print("receiveCompletion: \(event)")
@@ -42,10 +42,9 @@ class RoomViewModel: ObservableObject {
             
         })
         .store(in: &cancellables)
-        */
         
-        // RxSwift
         /*
+        // Coroutine vs RxSwift - IncorrectDereferenceException
         createSingle(
             scope: repository.scope,
             suspendWrapper: repository.getMessagesInRoomSuspended(roomId: 18631166)
@@ -66,9 +65,10 @@ class RoomViewModel: ObservableObject {
             }
         )
         .disposed(by: self.disposables)
-        */
+         */
         
-        // Reaktive
+        /*
+        // Reaktive - Not getting response back
         let disposable = repository.getMessagesInRoomRx(roomId: 18631166)
             .subscribe(
                 isThreadLocal: true,
@@ -78,6 +78,7 @@ class RoomViewModel: ObservableObject {
                 onSuccess: { (messages) in
                     NSLog("success: \(messages)")
                 })
+ */
     }
     
     func stopObserving() {

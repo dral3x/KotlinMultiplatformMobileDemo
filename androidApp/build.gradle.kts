@@ -3,7 +3,7 @@ plugins {
     kotlin("android")
     id("kotlin-android-extensions")
 }
-group = "com.spreaker.podstories"
+group = "com.spreaker.experiment.kmm"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":podStoriesKit"))
+    implementation(project(":shared"))
     implementation("com.google.android.material:material:1.2.1")
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
@@ -36,7 +36,7 @@ dependencies {
 android {
     compileSdkVersion(29)
     defaultConfig {
-        applicationId = "com.spreaker.podstories.androidApp"
+        applicationId = "com.spreaker.kmm.androidApp"
         minSdkVersion(24)
         targetSdkVersion(29)
         versionCode = 1

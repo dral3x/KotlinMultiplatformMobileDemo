@@ -6,7 +6,7 @@ target 'iosApp' do
   pod 'RxSwift', '5.1.1'
 
   # Shared library
-  pod 'podStoriesKit', :path => '../podStoriesKit'
+  pod 'shared', :path => '../shared'
 end
 
 

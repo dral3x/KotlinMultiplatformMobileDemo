@@ -13,9 +13,8 @@ pluginManagement {
         }
     }
 }
-rootProject.name = "PodStories"
-
+rootProject.name = "SpreakerKMMApp"
 
 include(":androidApp")
-include(":podStoriesKit")
+include(":shared")
 

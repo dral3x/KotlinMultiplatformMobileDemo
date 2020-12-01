@@ -1,5 +1,5 @@
 import UIKit
-import podStoriesKit
+import shared
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -1,6 +1,5 @@
 import UIKit
 import SwiftUI
-import podStoriesKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

@@ -11,7 +11,7 @@ buildscript {
     }
 }
 
-group = "com.spreaker.podstories"
+group = "com.spreaker.kmm"
 version = "1.0-SNAPSHOT"
 
 allprojects {

@@ -1,5 +1,5 @@
 import SwiftUI
-import podStoriesKit
+import shared
 
 struct ContentView: View {
     

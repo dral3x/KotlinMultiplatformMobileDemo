@@ -6,7 +6,7 @@
 //  Copyright © 2020 orgName. All rights reserved.
 //
 
-import podStoriesKit
+import shared
 
 class CrashlyticsCrashHandler: CrashkiosCrashHandler {
     override func crashParts(
