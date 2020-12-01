@@ -1,4 +1,4 @@
-package com.spreaker.kmm.shared.domain
+package com.spreaker.kmm.shared.data
 
 import platform.UIKit.UIDevice
 
