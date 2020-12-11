@@ -1,8 +1,5 @@
 package com.spreaker.kmm.shared.domain.repositories
 
-import com.badoo.reaktive.single.SingleWrapper
-import com.badoo.reaktive.single.wrap
-import com.spreaker.kmm.shared.domain.models.Message
 import com.spreaker.kmm.shared.data.FlowWrapper
 import com.spreaker.kmm.shared.data.SuspendWrapper
 import kotlinx.coroutines.CoroutineScope
@@ -10,7 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlin.coroutines.CoroutineContext
 import kotlin.native.concurrent.freeze
-
 
 class MessageRepositoryIos(private val repository: MessageRepository) {
 
@@ -26,7 +22,4 @@ class MessageRepositoryIos(private val repository: MessageRepository) {
     fun getMessagesInRoomSuspended(roomId: Int) = SuspendWrapper { repository.getMessagesInRoom(roomId) }
 
     fun getMessagesInRoomFlow(roomId: Int) = FlowWrapper(repository.getMessagesInRoomFlow(roomId))
-
-    fun getMessagesInRoomRx(roomId: Int): SingleWrapper<List<Message>> =
-        repository.getMessagesInRoomRx(roomId).wrap()
 }

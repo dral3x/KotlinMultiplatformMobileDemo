@@ -75,3 +75,8 @@ Examples of classes:
 - https://github.com/prof18/MoneyFlow
 - https://github.com/Drjacky/TMDbMultiplatform
 - https://github.com/kuuuurt/jokes-app-multiplatform
+
+
+# Things to know
+
+Calling Kotlin suspend functions from Swift/Objective-C is currently supported only on main thread

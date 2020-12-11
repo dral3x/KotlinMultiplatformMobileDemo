@@ -6,13 +6,18 @@ struct ContentView: View {
     @ObservedObject var viewModel: RoomViewModel = RoomViewModel()
 
     var body: some View {
-        Text(viewModel.text)
-            .onAppear {
-                self.viewModel.startObserving()
-            }
-            .onDisappear {
-                self.viewModel.stopObserving()
-            }
+        VStack {
+            Text(viewModel.text)
+            Button("SEND", action: {
+                self.viewModel.sendMessage()
+            })
+        }
+        .onAppear {
+            self.viewModel.startObserving()
+        }
+        .onDisappear {
+            self.viewModel.stopObserving()
+        }
     }
     
 }

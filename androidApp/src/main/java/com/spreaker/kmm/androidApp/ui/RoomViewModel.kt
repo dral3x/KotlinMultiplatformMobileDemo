@@ -4,31 +4,31 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.badoo.reaktive.scheduler.ioScheduler
-import com.badoo.reaktive.scheduler.mainScheduler
-import com.badoo.reaktive.single.observeOn
-import com.badoo.reaktive.single.subscribe
-import com.badoo.reaktive.single.subscribeOn
+import androidx.lifecycle.viewModelScope
+import com.spreaker.kmm.shared.data.concurrent.ensureMainScope
+import com.spreaker.kmm.shared.domain.Greeting
+import com.spreaker.kmm.shared.domain.managers.MessageManager
 import com.spreaker.kmm.shared.domain.models.Message
 import com.spreaker.kmm.shared.domain.repositories.MessageRepository
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 class RoomViewModel(
-    val repository: MessageRepository
+    val repository: MessageRepository,
+    val manager: MessageManager
 ): ViewModel() {
 
-    private val messages: MutableLiveData<List<Message>> by lazy {
-        MutableLiveData<List<Message>>().also {
-            loadMessages()
-        }
-    }
+    var jobs = mutableListOf<Job>()
 
-    fun getAllMessages(roomId: Int): LiveData<List<Message>> {
-        return messages
-    }
+    private val _text = MutableLiveData<String>(Greeting().greeting())
+    val text: LiveData<String>
+        get() = _text
 
-    private fun loadMessages() {
-        //TODO
+    fun startObserving() {
+        ensureMainScope()
+        Log.d("RoomViewModel", "startObserving")
 
         /*
         // Suspended function
@@ -39,27 +39,29 @@ class RoomViewModel(
         }
         */
 
-        /*
         // Flow
-        viewModelScope.launch(Dispatchers.Main) {
-            val result = repository.getMessagesInRoomFlow(18631166).singleOrNull()
-            messages.value = result
-            Log.i("RoomViewModel", result.toString())
-        }
-        */
+        viewModelScope.launch { // Now on main thread
+            repository.getMessagesInRoomFlow(18631166)
+                .collect {
+                    _text.value = it[0].text
+                }
+        }.let { jobs.add(it) }
+    }
 
-        // Rx
-        repository.getMessagesInRoomRx(18631166)
-            .subscribeOn(ioScheduler)
-            .observeOn(mainScheduler)
-            .subscribe(
-                isThreadLocal = false,
-                onSuccess = {
-                    messages.value = it
-                    Log.i("RoomViewModel", it.toString())
-                },
-                onError = {
-                    Log.e("RoomViewModel", "Error", it)
-                })
+    fun stopObserving() {
+        ensureMainScope()
+        Log.d("RoomViewModel", "stopObserving")
+
+        jobs.forEach { it.cancel() }
+        jobs.clear()
+    }
+
+    fun sendMessage() {
+        ensureMainScope()
+
+        // Always from main thread
+        manager.sendMessageInRoom(
+                Message(messageId = 1, authorId = 42, authorFullname = "Sandro", text = "Ciao!"),
+                18631166)
     }
 }

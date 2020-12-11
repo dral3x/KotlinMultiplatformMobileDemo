@@ -4,15 +4,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.native.cocoapods")
 }
-group = "com.spreaker.experiment.kmm"
 version = "1.0-SNAPSHOT"
-
-repositories {
-    gradlePluginPortal()
-    google()
-    jcenter()
-    mavenCentral()
-}
 
 kotlin {
     android()
@@ -23,7 +15,7 @@ kotlin {
         summary = "Some description for a Kotlin/Native module"
         homepage = "Link to a Kotlin/Native module homepage"
 
-        ios.deploymentTarget = "13.0"
+        ios.deploymentTarget = Versions.iosDeploymentTarget
     }
 
     sourceSets {
@@ -32,10 +24,6 @@ kotlin {
             dependencies {
                 implementation(Deps.Serialization.json)
                 implementation(Deps.Coroutines.core)
-
-                // Rx
-                implementation(Deps.Reaktive.core)
-                implementation(Deps.Reaktive.annotations)
 
                 // HTTP
                 implementation(Deps.Ktor.core)
@@ -83,11 +71,11 @@ kotlin {
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(Versions.androidCompileSdk)
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(29)
+        minSdkVersion(Versions.androidMinSdk)
+        targetSdkVersion(Versions.androidTargetSdk)
         versionCode = 1
         versionName = "1.0"
     }

@@ -1,32 +1,44 @@
 package com.spreaker.kmm.androidApp.ui
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.spreaker.kmm.androidApp.R
-import com.spreaker.kmm.shared.domain.Greeting
 import com.spreaker.kmm.shared.domain.models.Message
 
-fun greet(): String {
-    return Greeting().greeting()
-}
-
 class MainActivity : AppCompatActivity() {
+
+    val model: RoomViewModel by viewModels { ViewModelFactory.getInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Prepare UI elements
         val tv: TextView = findViewById(R.id.text_view)
-        tv.text = greet()
+        findViewById<Button>(R.id.button_view).also {
+            it.setOnClickListener { model.sendMessage() }
+        }
 
-        val model: RoomViewModel by viewModels { ViewModelFactory.getInstance() }
-        model.getAllMessages(42).observe(this, Observer<List<Message>> { messages ->
+        // Hydrate
+        model.text.observe(this, Observer<String> { txt ->
             // Update UI
-            tv.text = messages[0].toString()
+            Log.d("MainActivity", "Got text to display")
+            tv.text = txt
         })
+
+        // Start observing changes
+        model.startObserving()
+    }
+
+    override fun onDestroy() {
+        model.stopObserving()
+
+        super.onDestroy()
     }
 
 }

@@ -1,8 +1,32 @@
 object Versions {
-    const val coroutines = "1.4.2-native-mt"
-    const val ktor = "1.4.1"
+    // Android SDK
+    const val androidCompileSdk = 30
+    const val androidTargetSdk = 30
+    const val androidMinSdk = 24
+
+    // iOS SDK
+    const val iosDeploymentTarget = "13.0"
+
+    // Tooling
+    const val kotlin = "1.4.10"
+    const val buildTools = "30.0.2"
+    const val androidGradlePlugin = "4.1.1"
+    const val kotlinGradlePlugin = "1.4.20"
+
+    // Dependencies
+    const val coroutines = "1.4.2-native-mt" // multi-thread version
+    const val ktor = "1.4.2"
     const val serialization = "1.0.1"
-    const val reaktive = "1.1.18"
+    const val material = "1.2.1"
+
+    object AndroidX {
+        val appcompat = "1.2.0"
+        val activity = "1.1.0"
+        val constraintlayout = "2.0.4"
+        val core = "1.3.2"
+        val lifecycle = "2.2.0"
+        val test = "1.3.0"
+    }
 }
 
 object Deps {
@@ -15,6 +39,14 @@ object Deps {
     object Serialization {
         // https://github.com/Kotlin/kotlinx.serialization
         const val json = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}"
+    }
+
+    object AndroidX {
+        val appcompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appcompat}"
+        val activityKtx = "androidx.activity:activity-ktx:${Versions.AndroidX.activity}"
+        val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.AndroidX.constraintlayout}"
+        val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.lifecycle}"
+        val lifecycleViewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.AndroidX.lifecycle}"
     }
 
     object Ktor {
@@ -30,9 +62,6 @@ object Deps {
         }
     }
 
-    object Reaktive {
-        const val core          = "com.badoo.reaktive:reaktive:${Versions.reaktive}"
-        const val annotations   = "com.badoo.reaktive:reaktive-annotations:${Versions.reaktive}"
-    }
+    const val material = "com.google.android.material:material:${Versions.material}"
 
 }

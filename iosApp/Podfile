@@ -2,10 +2,6 @@ use_frameworks!
 platform :ios, '13.0'
 
 target 'iosApp' do
-  # App dependencies
-  pod 'RxSwift', '5.1.1'
-
-  # Shared library
   pod 'shared', :path => '../shared'
 end
 

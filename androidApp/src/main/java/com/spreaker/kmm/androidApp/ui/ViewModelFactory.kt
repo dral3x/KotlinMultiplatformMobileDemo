@@ -9,7 +9,10 @@ class ViewModelFactory: ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == RoomViewModel::class.java) {
-            return RoomViewModel(Injection.provideMessageRepository()) as T
+            return RoomViewModel(
+                Injection.provideMessageRepository(),
+                Injection.provideMessageManager()
+            ) as T
         }
 
         throw IllegalArgumentException("Unknown model class $modelClass")

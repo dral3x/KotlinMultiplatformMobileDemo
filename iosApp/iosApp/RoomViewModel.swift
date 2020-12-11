@@ -8,81 +8,63 @@
 
 import Foundation
 import Combine
-import RxSwift
 import shared
 
+//TODO Dependency injection
 class RoomViewModel: ObservableObject {
     
     @Published private(set) var text: String = Greeting().greeting()
     
     private var cancellables = Set<AnyCancellable>()
-    private var disposables = DisposeBag()
     
     func startObserving() {
-        let repo: MessageRepository = MessageRepositoryImpl(client: ApiClientBuilder().defaultHttpClient())
-        let repository = MessageRepositoryIos(repository: repo)
-        
+        print("RoomViewModel startObserving()")
 
-        // Coroutine vs Combine - IncorrectDereferenceException
-        createDeferred(
+        let repo: MessageRepository = MessageRepositoryImpl(client: HttpClientFactory().defaultHttpClient())
+        let repository = MessageRepositoryIos(repository: repo)
+
+        /*
+        // Coroutine
+        repo.getMessagesInRoom(roomId: 18631166) { messages, error in
+            if let messages = messages {
+                self.text = String(describing: messages[0])
+            }
+        }
+        */
+        
+        // Coroutine -> Combine
+        createPublisher(
             scope: repository.scope,
-            suspendWrapper: repository.getMessagesInRoomSuspended(roomId: 18631166)
+            flowWrapper: repository.getMessagesInRoomFlow(roomId: 18631166)
         )
-//        createPublisher(
-//            scope: repository.scope,
-//            flowWrapper: repository.getMessagesInRoomFlow(roomId: 18631166)
-//        )
+        .receive(on: DispatchQueue.main)
         .sink(receiveCompletion: { (event) in
             
             print("receiveCompletion: \(event)")
             
         }, receiveValue: { (value) in
-            
-            print("receiveValue: \(value)")
-            
+            guard let messages = value as? [Message] else { return }
+
+            print("Got \(messages.count) messages")
+            self.text = String(describing: messages[0].text)
         })
         .store(in: &cancellables)
-        
-        /*
-        // Coroutine vs RxSwift - IncorrectDereferenceException
-        createSingle(
-            scope: repository.scope,
-            suspendWrapper: repository.getMessagesInRoomSuspended(roomId: 18631166)
-        )
-        .asObservable()
-        .subscribe(
-            onNext: { thing in
-                NSLog("next: \(thing)")
-            },
-            onError: { (error: Error) in
-                NSLog("error: \(error.localizedDescription)")
-            },
-            onCompleted: {
-                NSLog("complete!")
-            },
-            onDisposed: {
-                NSLog("disposed!")
-            }
-        )
-        .disposed(by: self.disposables)
-         */
-        
-        /*
-        // Reaktive - Not getting response back
-        let disposable = repository.getMessagesInRoomRx(roomId: 18631166)
-            .subscribe(
-                isThreadLocal: true,
-                onError: { error in
-                    NSLog("error: \(error)")
-                },
-                onSuccess: { (messages) in
-                    NSLog("success: \(messages)")
-                })
- */
     }
     
     func stopObserving() {
+        print("RoomViewModel stopObserving()")
+
         cancellables.cancelAll()
     }
-    
+
+    func sendMessage() {
+        print("RoomViewModel sendMessage()")
+
+        let manager: MessageManager = MessageManagerImpl()
+
+        manager.sendMessageInRoom(
+            message: Message(messageId: 1, authorId: 42, authorFullname: "Sandro", text: "Ciao!"),
+            roomId: 18631166
+        )
+    }
 }
