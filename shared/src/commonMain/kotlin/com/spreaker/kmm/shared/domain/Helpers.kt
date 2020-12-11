@@ -11,7 +11,7 @@ fun calculateFactorial(number: Int): ULong {
 }
 
 fun performCPUIntensiveTask() {
-    for (i in 1..250) {
+    for (i in 1..150) {
         calculateFactorial(5000000)
     }
 }
