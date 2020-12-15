@@ -18,9 +18,8 @@
 		7555FFA1242A565B00829871 /* iosAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FFA0242A565B00829871 /* iosAppUITests.swift */; };
 		FA1F869B25713CAE00CADAB3 /* RoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F869A25713CAE00CADAB3 /* RoomViewModel.swift */; };
 		FA57CE292588F828004AA119 /* PushNotificationServiceiOSImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA57CE282588F828004AA119 /* PushNotificationServiceiOSImpl.swift */; };
-		FA731242257651F500991CB7 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA731241257651F500991CB7 /* Injection.swift */; };
+		FA731242257651F500991CB7 /* InjectionCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA731241257651F500991CB7 /* InjectionCenter.swift */; };
 		FA73124725765D2000991CB7 /* Combine+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73124625765D2000991CB7 /* Combine+Util.swift */; };
-		FA7312522576646500991CB7 /* RxSwift+Wrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7312512576646500991CB7 /* RxSwift+Wrappers.swift */; };
 		FA73125725767CDB00991CB7 /* CrashHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73125625767CDB00991CB7 /* CrashHandler.swift */; };
 		FA9C4FD22575502100C78D6B /* Combine+Wrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9C4FD12575502100C78D6B /* Combine+Wrappers.swift */; };
 /* End PBXBuildFile section */
@@ -61,9 +60,8 @@
 		7555FFA2242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA1F869A25713CAE00CADAB3 /* RoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewModel.swift; sourceTree = "<group>"; };
 		FA57CE282588F828004AA119 /* PushNotificationServiceiOSImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationServiceiOSImpl.swift; sourceTree = "<group>"; };
-		FA731241257651F500991CB7 /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
+		FA731241257651F500991CB7 /* InjectionCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionCenter.swift; sourceTree = "<group>"; };
 		FA73124625765D2000991CB7 /* Combine+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+Util.swift"; sourceTree = "<group>"; };
-		FA7312512576646500991CB7 /* RxSwift+Wrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxSwift+Wrappers.swift"; sourceTree = "<group>"; };
 		FA73125625767CDB00991CB7 /* CrashHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashHandler.swift; sourceTree = "<group>"; };
 		FA9C4FD12575502100C78D6B /* Combine+Wrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+Wrappers.swift"; sourceTree = "<group>"; };
 		FD669AEF7058B8CAFAC936E2 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -136,7 +134,6 @@
 				FA73124625765D2000991CB7 /* Combine+Util.swift */,
 				FA9C4FD12575502100C78D6B /* Combine+Wrappers.swift */,
 				FA73125625767CDB00991CB7 /* CrashHandler.swift */,
-				FA7312512576646500991CB7 /* RxSwift+Wrappers.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				7555FF89242A565B00829871 /* LaunchScreen.storyboard */,
 			);
@@ -189,7 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				7555FF7E242A565900829871 /* AppDelegate.swift */,
-				FA731241257651F500991CB7 /* Injection.swift */,
+				FA731241257651F500991CB7 /* InjectionCenter.swift */,
 				7555FF80242A565900829871 /* SceneDelegate.swift */,
 			);
 			path = init;
@@ -366,12 +363,11 @@
 				FA9C4FD22575502100C78D6B /* Combine+Wrappers.swift in Sources */,
 				FA73125725767CDB00991CB7 /* CrashHandler.swift in Sources */,
 				7555FF81242A565900829871 /* SceneDelegate.swift in Sources */,
-				FA731242257651F500991CB7 /* Injection.swift in Sources */,
+				FA731242257651F500991CB7 /* InjectionCenter.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				FA57CE292588F828004AA119 /* PushNotificationServiceiOSImpl.swift in Sources */,
 				FA73124725765D2000991CB7 /* Combine+Util.swift in Sources */,
 				FA1F869B25713CAE00CADAB3 /* RoomViewModel.swift in Sources */,
-				FA7312522576646500991CB7 /* RxSwift+Wrappers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

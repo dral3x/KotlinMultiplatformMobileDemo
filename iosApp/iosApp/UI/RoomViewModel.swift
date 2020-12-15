@@ -10,7 +10,6 @@ import Foundation
 import Combine
 import shared
 
-//TODO Dependency injection
 class RoomViewModel: ObservableObject {
     
     @Published private(set) var text: String = Greeting().greeting()
@@ -20,11 +19,9 @@ class RoomViewModel: ObservableObject {
     func startObserving() {
         print("RoomViewModel startObserving()")
 
-        let repo: MessageRepository = MessageRepositoryImpl(client: HttpClientFactory().defaultHttpClient())
-        let repository = MessageRepositoryIos(repository: repo)
-
         /*
         // Coroutine -> Callback
+        let repo = InjectorCenter.inject(MessageRepository.self)
         repo.getMessagesInRoom(roomId: 18631166) { messages, error in
             if let messages = messages {
                 self.text = String(describing: messages[0])
@@ -33,6 +30,7 @@ class RoomViewModel: ObservableObject {
         */
         
         // Coroutine -> Combine
+        let repository = InjectorCenter.inject(MessageRepositoryIos.self)
         createPublisher(
             scope: repository.scope,
             flowWrapper: repository.getMessagesInRoomFlow(roomId: 18631166)
@@ -60,7 +58,7 @@ class RoomViewModel: ObservableObject {
     func sendMessage() {
         print("RoomViewModel sendMessage()")
 
-        let manager: MessageManager = MessageManagerImpl()
+        let manager = InjectorCenter.inject(MessageManager.self)
 
         manager.sendMessageInRoom(
             message: Message(messageId: 1, authorId: 42, authorFullname: "Sandro", text: "Ciao!"),
