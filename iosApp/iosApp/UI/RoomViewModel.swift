@@ -24,7 +24,7 @@ class RoomViewModel: ObservableObject {
         let repository = MessageRepositoryIos(repository: repo)
 
         /*
-        // Coroutine
+        // Coroutine -> Callback
         repo.getMessagesInRoom(roomId: 18631166) { messages, error in
             if let messages = messages {
                 self.text = String(describing: messages[0])

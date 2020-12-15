@@ -9,6 +9,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.flow.flow
 
 class MessageRepositoryImpl(private val client: HttpClient): MessageRepository {
@@ -61,5 +62,5 @@ class MessageRepositoryImpl(private val client: HttpClient): MessageRepository {
             // Parse error
             error("Not good!")
         }
-    }
+    }.cancellable() // Ensure you can cancel this anytime
 }

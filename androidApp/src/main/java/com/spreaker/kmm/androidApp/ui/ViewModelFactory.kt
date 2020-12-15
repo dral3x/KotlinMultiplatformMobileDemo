@@ -2,7 +2,9 @@ package com.spreaker.kmm.androidApp.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.spreaker.kmm.androidApp.di.Injection
+import com.spreaker.kmm.androidApp.di.InjectionCenter
+import com.spreaker.kmm.shared.domain.managers.MessageManager
+import com.spreaker.kmm.shared.domain.repositories.MessageRepository
 
 
 class ViewModelFactory: ViewModelProvider.Factory {
@@ -10,8 +12,8 @@ class ViewModelFactory: ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass == RoomViewModel::class.java) {
             return RoomViewModel(
-                Injection.provideMessageRepository(),
-                Injection.provideMessageManager()
+                InjectionCenter.inject(MessageRepository::class.java),
+                InjectionCenter.inject(MessageManager::class.java),
             ) as T
         }
 

@@ -4,12 +4,20 @@ import shared
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var userManager: UserManager!
+    var pushNotificationManager: PushNotificationManager!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         //CrashIntegrationKt.crashInit(handler: CrashlyticsCrashHandler())
+        userManager = UserManager()
+        userManager.loggedUser = User(userId: 42, fullname: "Chuck Norris")
+        
+        let pushNotificationService = PushNotificationServiceiOSImpl()
+        pushNotificationManager = PushNotificationManager(service: pushNotificationService, userManager: userManager)
+        
+        pushNotificationManager.onApplicationStartup()
         
         return true
     }

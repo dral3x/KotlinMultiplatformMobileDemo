@@ -38,34 +38,9 @@ func createDeferred<T>(
     .eraseToAnyPublisher()
 }
 
-//func createPublisher<T>(
-//    scope: Kotlinx_coroutines_coreCoroutineScope,
-//    flowWrapper: FlowWrapper<T>,
-//    jobCallback: @escaping (Kotlinx_coroutines_coreJob) -> Void = { _ in }
-//) -> AnyPublisher<T, KotlinError> {
-//    var disposable: Kotlinx_coroutines_coreJob?
-//    return Deferred {
-//        Future { promise in
-//            let job: Kotlinx_coroutines_coreJob = flowWrapper.subscribe(
-//                scope: scope,
-//                onEach: { item in promise(.success(item!)) },
-//                onComplete: { /*observer.on(.completed)*/ },
-//                onThrow: { error in promise(.failure(KotlinError(error))) }
-//            )
-//            disposable = job
-//            jobCallback(job)
-//        }
-//    }
-//    .handleEvents(receiveCancel: {
-//        disposable?.cancel(cause: nil)
-//    })
-//    .eraseToAnyPublisher()
-//}
-
 func createPublisher<T>(
     scope: Kotlinx_coroutines_coreCoroutineScope,
-    flowWrapper: FlowWrapper<T>,
-    jobCallback: @escaping (Kotlinx_coroutines_coreJob) -> Void = { _ in }
+    flowWrapper: FlowWrapper<T>
 ) -> AnyPublisher<T, KotlinError> {
     let subject = PassthroughSubject<T, KotlinError>()
     var job: Kotlinx_coroutines_coreJob?
