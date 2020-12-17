@@ -1,5 +1,6 @@
 package com.spreaker.kmm.shared.domain.repositories
 
+import com.spreaker.kmm.shared.data.concurrent.freeze
 import com.spreaker.kmm.shared.domain.api.ApiPager
 import com.spreaker.kmm.shared.domain.models.Message
 import com.spreaker.kmm.shared.domain.parsers.decodeApiResponse
@@ -13,6 +14,10 @@ import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.flow.flow
 
 class MessageRepositoryImpl(private val client: HttpClient): MessageRepository {
+
+    init {
+        freeze()
+    }
 
     override suspend fun getMessagesInRoom(roomId: Int): List<Message> {
         val response = client.request<HttpResponse> {
@@ -55,7 +60,7 @@ class MessageRepositoryImpl(private val client: HttpClient): MessageRepository {
             // Parse success
             val apiResponse = decodeApiResponse<ApiPager<Message>>(response.readText())
 
-            performCPUIntensiveTask()
+            //performCPUIntensiveTask()
 
             emit(apiResponse.response.items)
         } else {

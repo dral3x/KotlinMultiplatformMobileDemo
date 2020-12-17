@@ -10,11 +10,10 @@ import com.spreaker.kmm.shared.domain.repositories.MessageRepository
 class ViewModelFactory: ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass == RoomViewModel::class.java) {
-            return RoomViewModel(
-                InjectionCenter.inject(MessageRepository::class.java),
-                InjectionCenter.inject(MessageManager::class.java),
-            ) as T
+
+        // Here's how we build new instances of ViewModel classes
+        when (modelClass) {
+            RoomViewModel::class.java -> return RoomViewModel(InjectionCenter) as T
         }
 
         throw IllegalArgumentException("Unknown model class $modelClass")

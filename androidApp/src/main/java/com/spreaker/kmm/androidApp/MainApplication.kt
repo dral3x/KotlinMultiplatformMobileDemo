@@ -5,7 +5,9 @@ import com.spreaker.kmm.androidApp.data.pushnotifications.PushNotificationServic
 import com.spreaker.kmm.androidApp.di.InjectionCenter
 import com.spreaker.kmm.shared.data.http.HttpClientFactory
 import com.spreaker.kmm.shared.data.pushnotifications.PushNotificationService
+import com.spreaker.kmm.shared.domain.bus.EventBus
 import com.spreaker.kmm.shared.domain.managers.*
+import com.spreaker.kmm.shared.domain.models.User
 import com.spreaker.kmm.shared.domain.repositories.MessageRepository
 import com.spreaker.kmm.shared.domain.repositories.MessageRepositoryImpl
 import io.ktor.client.*
@@ -22,8 +24,12 @@ class MainApplication: Application() {
 
         val httpClient = HttpClientFactory().defaultHttpClient()
         InjectionCenter.put(httpClient, HttpClient::class.java)
+
+        val bus = EventBus()
+        InjectionCenter.put(bus)
+
         InjectionCenter.put(MessageRepositoryImpl(httpClient), MessageRepository::class.java)
-        InjectionCenter.put(MessageManagerImpl(), MessageManager::class.java)
+        InjectionCenter.put(MessageManagerImpl(bus), MessageManager::class.java)
 
         val pushNotificationService = PushNotificationServiceAndroidImpl()
         val pushNotificationManager = PushNotificationManager(pushNotificationService, userManager)

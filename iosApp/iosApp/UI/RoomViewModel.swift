@@ -30,23 +30,31 @@ class RoomViewModel: ObservableObject {
         */
         
         // Coroutine -> Combine
-        let repository = InjectorCenter.inject(MessageRepositoryIos.self)
-        createPublisher(
-            scope: repository.scope,
-            flowWrapper: repository.getMessagesInRoomFlow(roomId: 18631166)
-        )
-        .receive(on: DispatchQueue.main)
-        .sink(receiveCompletion: { (event) in
-            
-            print("receiveCompletion: \(event)")
-            
-        }, receiveValue: { (value) in
-            guard let messages = value as? [Message] else { return }
-
-            print("Got \(messages.count) messages")
-            self.text = String(describing: messages[0].text)
-        })
-        .store(in: &cancellables)
+        let repo = InjectorCenter.inject(MessageRepository.self)
+        repo.getMessagesInRoomFlow(roomId: 18631166)
+            .asPublisher(of: NSArray.self) // specifically a [Message]
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { (event) in
+                
+                print("receiveCompletion: \(event)")
+                
+            }, receiveValue: { (value) in
+                guard let messages = value as? [Message] else { return }
+                
+                print("Got \(messages.count) messages")
+                self.text = String(describing: messages[0].text)
+            })
+            .store(in: &cancellables)
+        
+        let manager = InjectorCenter.inject(MessageManager.self)
+        manager.observeMessageSendStateChange()
+            .asNeverEndingPublisher(of: MessageSendStateChangeEvent.self)
+            .receive(on: DispatchQueue.main)
+            .sink { (event) in
+                print("Got event \(event)")
+                self.text = "\(event.state)"
+            }
+            .store(in: &cancellables)
     }
     
     func stopObserving() {

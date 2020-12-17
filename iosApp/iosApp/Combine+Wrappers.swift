@@ -38,11 +38,33 @@ func createDeferred<T>(
     .eraseToAnyPublisher()
 }
 
+func createNeverEndingPublisher<T>(
+    scope: Kotlinx_coroutines_coreCoroutineScope,
+    flowWrapper: FlowWrapper<T>
+) -> AnyPublisher<T, Never> {
+    let subject = PassthroughSubject<T, Never>()
+    var job: Kotlinx_coroutines_coreJob?
+    return subject
+        .handleEvents(
+            receiveSubscription: { (subscription) in
+                job = flowWrapper.subscribe(
+                    scope: scope,
+                    onEach: { (item) in subject.send(item!) },
+                    onComplete: { /* it should never happen */ },
+                    onThrow: { _ in /* it should never happen */ }
+                )
+            },
+            receiveCancel: {
+                job?.cancel(cause: nil)
+            })
+        .eraseToAnyPublisher()
+}
+
 func createPublisher<T>(
     scope: Kotlinx_coroutines_coreCoroutineScope,
     flowWrapper: FlowWrapper<T>
-) -> AnyPublisher<T, KotlinError> {
-    let subject = PassthroughSubject<T, KotlinError>()
+) -> AnyPublisher<T, Error> {
+    let subject = PassthroughSubject<T, Error>()
     var job: Kotlinx_coroutines_coreJob?
     return subject
         .handleEvents(
@@ -58,4 +80,17 @@ func createPublisher<T>(
                 job?.cancel(cause: nil)
             })
         .eraseToAnyPublisher()
+}
+
+extension Kotlinx_coroutines_coreFlow {
+    func asNeverEndingPublisher<T: AnyObject>(
+        of output: T.Type,
+        inScope scope: Kotlinx_coroutines_coreCoroutineScope = CoroutineScopes().main
+    ) -> AnyPublisher<T, Never> {
+        return createNeverEndingPublisher(scope: scope, flowWrapper: FlowWrapper<T>(flow: self))
+    }
+    
+    func asPublisher<T: AnyObject>(of output: T.Type) -> AnyPublisher<T, Error> {
+        return createPublisher(scope: CoroutineScopes().io, flowWrapper: FlowWrapper<T>(flow: self))
+    }
 }

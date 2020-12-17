@@ -44,4 +44,4 @@ sealed class FlowWrapperParent<T>(private val flow: Flow<T>) {
         .freeze()
 }
 
-class FlowWrapper<T : Any>(flow: Flow<T>) : FlowWrapperParent<T>(flow)
+class FlowWrapper<T>(flow: Flow<T>) : FlowWrapperParent<T>(flow)

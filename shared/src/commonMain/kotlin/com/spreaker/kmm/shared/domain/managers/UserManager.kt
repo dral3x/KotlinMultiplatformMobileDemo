@@ -1,7 +1,7 @@
 package com.spreaker.kmm.shared.domain.managers
 
+import com.spreaker.kmm.shared.domain.models.User
 
-data class User(val userId: Int, val fullname: String?)
 
 class UserManager {
     var loggedUser: User? = null

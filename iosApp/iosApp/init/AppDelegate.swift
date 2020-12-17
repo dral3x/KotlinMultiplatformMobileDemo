@@ -29,7 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let messageRepositoryIos = MessageRepositoryIos(repository: messageRepository)
         InjectorCenter.sharedInstance.put(messageRepositoryIos)
         
-        let messageManager = MessageManagerImpl()
+        let bus = EventBus()
+        InjectorCenter.sharedInstance.put(bus)
+        let messageManager = MessageManagerImpl(bus: bus)
         InjectorCenter.sharedInstance.put(messageManager, as: MessageManager.self)
         
         // Fake logged-in user

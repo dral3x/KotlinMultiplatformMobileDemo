@@ -61,6 +61,7 @@ Examples of classes:
 ## Documentation and blogposts
 - https://kotlinlang.org/docs/mobile/home.html
 - https://dev.to/kuuurt/maximizing-code-sharing-between-android-and-ios-with-kotlin-multiplatform-54h8
+- https://github.com/Kotlin/kotlinx.coroutines/blob/master/docs/shared-mutable-state-and-concurrency.md
 
 ## Dependencies
 - https://github.com/touchlab/xcode-kotlin

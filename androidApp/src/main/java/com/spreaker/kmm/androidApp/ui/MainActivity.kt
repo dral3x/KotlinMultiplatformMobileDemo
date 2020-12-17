@@ -12,7 +12,7 @@ import com.spreaker.kmm.shared.domain.models.Message
 
 class MainActivity : AppCompatActivity() {
 
-    val model: RoomViewModel by viewModels { ViewModelFactory.getInstance() }
+    private val model: RoomViewModel by viewModels { ViewModelFactory.getInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             it.setOnClickListener { model.sendMessage() }
         }
 
-        // Hydrate
+        // Hydrate and keep it up-to-date
         model.text.observe(this, Observer<String> { txt ->
             // Update UI
             Log.d("MainActivity", "Got text to display")

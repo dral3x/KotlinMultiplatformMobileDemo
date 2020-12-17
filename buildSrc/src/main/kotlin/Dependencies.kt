@@ -14,7 +14,7 @@ object Versions {
     const val kotlinGradlePlugin = "1.4.20"
 
     // Dependencies
-    const val coroutines = "1.4.2-native-mt" // multi-thread version
+    const val coroutines = "1.4.2"
     const val ktor = "1.4.2"
     const val serialization = "1.0.1"
     const val material = "1.2.1"
@@ -27,13 +27,18 @@ object Versions {
         val lifecycle = "2.2.0"
         val test = "1.3.0"
     }
+
+    // Test dependencies
+    const val junit = "4.13.1"
+    const val mockito = "3.3.3"
 }
 
 object Deps {
 
     object Coroutines {
         // https://github.com/Kotlin/kotlinx.coroutines
-        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}-native-mt" // multi-thread version
+        const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     }
 
     object Serialization {
@@ -64,4 +69,7 @@ object Deps {
 
     const val material = "com.google.android.material:material:${Versions.material}"
 
+    // For testing only
+    const val junit = "junit:junit:${Versions.junit}"
+    const val mockito = "org.mockito:mockito-core:${Versions.mockito}"
 }

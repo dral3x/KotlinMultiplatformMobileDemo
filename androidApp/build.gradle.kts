@@ -37,18 +37,21 @@ android {
 dependencies {
     implementation(project(":shared"))
 
+    // UI
     implementation(Deps.AndroidX.appcompat)
     implementation(Deps.AndroidX.activityKtx)
     implementation(Deps.AndroidX.constraintlayout)
     implementation(Deps.AndroidX.lifecycleExtensions)
     implementation(Deps.AndroidX.lifecycleViewmodelKtx)
-
     implementation(Deps.material)
 
-    // Coroutine
+    // Backend
     implementation(Deps.Coroutines.core)
-
-    // HTTP
     implementation(Deps.Ktor.android)
+
+    // Testing
+    testImplementation(Deps.junit)
+    testImplementation(Deps.mockito)
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
 }
 
