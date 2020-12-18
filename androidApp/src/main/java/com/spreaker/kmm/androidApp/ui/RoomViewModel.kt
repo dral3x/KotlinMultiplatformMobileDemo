@@ -37,7 +37,6 @@ class RoomViewModel(
 
     fun startObserving() {
         // Always from main thread
-        Log.d("RoomViewModel", "startObserving")
 
         /*
         // Option 1: use suspended function
@@ -82,7 +81,7 @@ class RoomViewModel(
     }
 
     fun stopObserving() {
-        Log.d("RoomViewModel", "stopObserving")
+        // Always from main thread
 
         jobs.forEach { it.cancel() }
         jobs.clear()

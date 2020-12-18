@@ -4,6 +4,13 @@ import com.spreaker.kmm.androidApp.ui.RoomViewModel
 import com.spreaker.kmm.shared.domain.managers.MessageManager
 import com.spreaker.kmm.shared.domain.models.Message
 import com.spreaker.kmm.shared.domain.repositories.MessageRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -29,9 +36,16 @@ class RoomViewModelTest {
 
     @Before
     fun setUp() {
+        Dispatchers.setMain(Dispatchers.Unconfined)
+
         reoository = mock(MessageRepository::class.java)
         manager = mock(MessageManager::class.java)
         viewModel = RoomViewModel(reoository, manager)
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
     }
 
     @Test
@@ -44,6 +58,23 @@ class RoomViewModelTest {
 
         // Then
         verify(observer).onChanged(anyString())
+    }
+
+    @Test
+    fun testTextChangeOnLoad() {
+        // Given
+        var observer = mock(Observer::class.java) as Observer<String>
+        viewModel.text.observeForever(observer)
+        var messages = listOf(Message(1, null, "A", "Bye bye"))
+        Mockito.`when`(reoository.getMessagesInRoomFlow(anyInt())).thenReturn(flowOf(messages))
+        Mockito.`when`(manager.observeMessageSendStateChange()).thenReturn(emptyFlow())
+        reset(observer)
+
+        // When
+        viewModel.startObserving()
+
+        // Then
+        verify(observer).onChanged("Bye bye")
     }
 
     @Test

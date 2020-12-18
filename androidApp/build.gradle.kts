@@ -52,6 +52,7 @@ dependencies {
     // Testing
     testImplementation(Deps.junit)
     testImplementation(Deps.mockito)
-    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation(Deps.AndroidX.testing)
+    testImplementation(Deps.Coroutines.test)
 }
 

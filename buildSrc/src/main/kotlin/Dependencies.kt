@@ -26,6 +26,7 @@ object Versions {
         val core = "1.3.2"
         val lifecycle = "2.2.0"
         val test = "1.3.0"
+        val testing = "2.1.0"
     }
 
     // Test dependencies
@@ -52,6 +53,7 @@ object Deps {
         val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.AndroidX.constraintlayout}"
         val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.lifecycle}"
         val lifecycleViewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.AndroidX.lifecycle}"
+        val testing = "androidx.arch.core:core-testing:${Versions.AndroidX.testing}"
     }
 
     object Ktor {
