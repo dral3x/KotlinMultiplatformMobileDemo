@@ -2,6 +2,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.spreaker.kmm.androidApp.ui.RoomViewModel
 import com.spreaker.kmm.shared.domain.managers.MessageManager
+import com.spreaker.kmm.shared.domain.models.Message
 import com.spreaker.kmm.shared.domain.repositories.MessageRepository
 import org.junit.Before
 import org.junit.Rule
@@ -9,7 +10,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.*
+
 
 @RunWith(JUnit4::class)
 class RoomViewModelTest {
@@ -43,12 +46,12 @@ class RoomViewModelTest {
         verify(observer).onChanged(anyString())
     }
 
-//    @Test
-//    fun testSendMessage() {
-//        // When
-//        viewModel.sendMessage()
-//
-//        // Then
-//        verify(manager).sendMessageInRoom(any(Message::class.java), anyInt())
-//    }
+    @Test
+    fun testSendMessage() {
+        // When
+        viewModel.sendMessage()
+
+        // Then
+        verify(manager).sendMessageInRoom(anyObject(), anyInt())
+    }
 }
