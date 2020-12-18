@@ -14,8 +14,16 @@ class RoomViewModel: ObservableObject {
     
     @Published var text: String = Greeting().greeting()
     
-    lazy var repository: MessageRepository = InjectorCenter.inject(MessageRepository.self)
-    lazy var manager: MessageManager = InjectorCenter.inject(MessageManager.self)
+    let repository: MessageRepositoryIos
+    let manager: MessageManager
+    
+    init(
+        repository: MessageRepositoryIos = InjectorCenter.inject(MessageRepository.self).wrap(),
+        manager: MessageManager = InjectorCenter.inject(MessageManager.self)
+    ) {
+        self.repository = repository
+        self.manager = manager
+    }
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -33,8 +41,7 @@ class RoomViewModel: ObservableObject {
         */
         
         // Coroutine -> Combine
-        repository.getMessagesInRoomFlow(roomId: 18631166)
-            .asPublisher(of: NSArray.self) // specifically a [Message]
+        repository.getMessagesInRoom(roomId: 18631166)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { (event) in
                 
