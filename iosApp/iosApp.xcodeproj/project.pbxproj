@@ -19,9 +19,11 @@
 		FA1F869B25713CAE00CADAB3 /* RoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F869A25713CAE00CADAB3 /* RoomViewModel.swift */; };
 		FA57CE292588F828004AA119 /* PushNotificationServiceiOSImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA57CE282588F828004AA119 /* PushNotificationServiceiOSImpl.swift */; };
 		FA731242257651F500991CB7 /* InjectionCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA731241257651F500991CB7 /* InjectionCenter.swift */; };
-		FA73124725765D2000991CB7 /* Combine+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73124625765D2000991CB7 /* Combine+Util.swift */; };
+		FA73124725765D2000991CB7 /* Combine+CreateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73124625765D2000991CB7 /* Combine+CreateObserver.swift */; };
 		FA73125725767CDB00991CB7 /* CrashHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA73125625767CDB00991CB7 /* CrashHandler.swift */; };
-		FA9C4FD22575502100C78D6B /* Combine+Wrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9C4FD12575502100C78D6B /* Combine+Wrappers.swift */; };
+		FA9C4FD22575502100C78D6B /* Combine+Coroutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9C4FD12575502100C78D6B /* Combine+Coroutine.swift */; };
+		FAB88775258C95DD0069355C /* Combine+Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB88774258C95DD0069355C /* Combine+Cancellable.swift */; };
+		FAB88786258CA0F90069355C /* Swift+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB88785258CA0F90069355C /* Swift+Builder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,9 +63,11 @@
 		FA1F869A25713CAE00CADAB3 /* RoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewModel.swift; sourceTree = "<group>"; };
 		FA57CE282588F828004AA119 /* PushNotificationServiceiOSImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationServiceiOSImpl.swift; sourceTree = "<group>"; };
 		FA731241257651F500991CB7 /* InjectionCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionCenter.swift; sourceTree = "<group>"; };
-		FA73124625765D2000991CB7 /* Combine+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+Util.swift"; sourceTree = "<group>"; };
+		FA73124625765D2000991CB7 /* Combine+CreateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+CreateObserver.swift"; sourceTree = "<group>"; };
 		FA73125625767CDB00991CB7 /* CrashHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashHandler.swift; sourceTree = "<group>"; };
-		FA9C4FD12575502100C78D6B /* Combine+Wrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+Wrappers.swift"; sourceTree = "<group>"; };
+		FA9C4FD12575502100C78D6B /* Combine+Coroutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+Coroutine.swift"; sourceTree = "<group>"; };
+		FAB88774258C95DD0069355C /* Combine+Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+Cancellable.swift"; sourceTree = "<group>"; };
+		FAB88785258CA0F90069355C /* Swift+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift+Builder.swift"; sourceTree = "<group>"; };
 		FD669AEF7058B8CAFAC936E2 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,15 +131,12 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				FA57CE272588F811004AA119 /* Services */,
-				FAD658D02583CAA200FA0C2B /* UI */,
-				FAD658CF2583CA9A00FA0C2B /* init */,
-				7555FF84242A565B00829871 /* Assets.xcassets */,
-				FA73124625765D2000991CB7 /* Combine+Util.swift */,
-				FA9C4FD12575502100C78D6B /* Combine+Wrappers.swift */,
-				FA73125625767CDB00991CB7 /* CrashHandler.swift */,
+				FAB8876D258C956B0069355C /* Combine+Extras */,
+				FAB88780258C96CC0069355C /* Data */,
+				FAB88784258CA0E50069355C /* Foundation+Extras */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				7555FF89242A565B00829871 /* LaunchScreen.storyboard */,
+				FAB8877F258C96C40069355C /* Presentation */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -182,14 +183,51 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		FAD658CF2583CA9A00FA0C2B /* init */ = {
+		FAB8876D258C956B0069355C /* Combine+Extras */ = {
+			isa = PBXGroup;
+			children = (
+				FAB88774258C95DD0069355C /* Combine+Cancellable.swift */,
+				FA9C4FD12575502100C78D6B /* Combine+Coroutine.swift */,
+				FA73124625765D2000991CB7 /* Combine+CreateObserver.swift */,
+			);
+			path = "Combine+Extras";
+			sourceTree = "<group>";
+		};
+		FAB8877F258C96C40069355C /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				7555FF84242A565B00829871 /* Assets.xcassets */,
+				FAD658D02583CAA200FA0C2B /* UI */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		FAB88780258C96CC0069355C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				FAD658CF2583CA9A00FA0C2B /* Init */,
+				FA73125625767CDB00991CB7 /* CrashHandler.swift */,
+				FA57CE272588F811004AA119 /* Services */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		FAB88784258CA0E50069355C /* Foundation+Extras */ = {
+			isa = PBXGroup;
+			children = (
+				FAB88785258CA0F90069355C /* Swift+Builder.swift */,
+			);
+			path = "Foundation+Extras";
+			sourceTree = "<group>";
+		};
+		FAD658CF2583CA9A00FA0C2B /* Init */ = {
 			isa = PBXGroup;
 			children = (
 				7555FF7E242A565900829871 /* AppDelegate.swift */,
 				FA731241257651F500991CB7 /* InjectionCenter.swift */,
 				7555FF80242A565900829871 /* SceneDelegate.swift */,
 			);
-			path = init;
+			path = Init;
 			sourceTree = "<group>";
 		};
 		FAD658D02583CAA200FA0C2B /* UI */ = {
@@ -360,14 +398,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				7555FF7F242A565900829871 /* AppDelegate.swift in Sources */,
-				FA9C4FD22575502100C78D6B /* Combine+Wrappers.swift in Sources */,
+				FA9C4FD22575502100C78D6B /* Combine+Coroutine.swift in Sources */,
 				FA73125725767CDB00991CB7 /* CrashHandler.swift in Sources */,
 				7555FF81242A565900829871 /* SceneDelegate.swift in Sources */,
 				FA731242257651F500991CB7 /* InjectionCenter.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				FA57CE292588F828004AA119 /* PushNotificationServiceiOSImpl.swift in Sources */,
-				FA73124725765D2000991CB7 /* Combine+Util.swift in Sources */,
+				FA73124725765D2000991CB7 /* Combine+CreateObserver.swift in Sources */,
+				FAB88775258C95DD0069355C /* Combine+Cancellable.swift in Sources */,
 				FA1F869B25713CAE00CADAB3 /* RoomViewModel.swift in Sources */,
+				FAB88786258CA0F90069355C /* Swift+Builder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,7 +574,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"iosApp/UI/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Presentation/UI/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -554,7 +594,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"iosApp/UI/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Presentation/UI/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

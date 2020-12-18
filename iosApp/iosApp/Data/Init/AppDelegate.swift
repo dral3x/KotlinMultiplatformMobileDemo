@@ -26,8 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let messageRepository = MessageRepositoryImpl(client: httpClient)
         InjectorCenter.sharedInstance.put(httpClient)
         InjectorCenter.sharedInstance.put(messageRepository, as: MessageRepository.self)
-        let messageRepositoryIos = MessageRepositoryIos(repository: messageRepository)
-        InjectorCenter.sharedInstance.put(messageRepositoryIos)
         
         let bus = EventBus()
         InjectorCenter.sharedInstance.put(bus)

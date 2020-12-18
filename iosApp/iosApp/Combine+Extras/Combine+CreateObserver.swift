@@ -8,29 +8,16 @@
 
 import Combine
 
-typealias CancelBag = Set<AnyCancellable>
-
-extension CancelBag {
-    mutating func cancelAll() {
-        forEach { $0.cancel() }
-        removeAll()
-    }
-}
-
 struct AnyObserver<Output, Failure: Error> {
     let onNext: ((Output) -> Void)
     let onError: ((Failure) -> Void)
     let onComplete: (() -> Void)
 }
 
-struct Disposable {
-    let dispose: () -> Void
-}
-
 extension AnyPublisher {
-    static func create(subscribe: @escaping (AnyObserver<Output, Failure>) -> Disposable) -> Self {
+    static func create(subscribe: @escaping (AnyObserver<Output, Failure>) -> AnyCancellable) -> Self {
         let subject = PassthroughSubject<Output, Failure>()
-        var disposable: Disposable?
+        var disposable: AnyCancellable?
         return subject
                 .handleEvents(receiveSubscription: { subscription in
                     disposable = subscribe(AnyObserver(
@@ -38,7 +25,7 @@ extension AnyPublisher {
                             onError: { failure in subject.send(completion: .failure(failure)) },
                             onComplete: { subject.send(completion: .finished) }
                     ))
-                }, receiveCancel: { disposable?.dispose() })
+                }, receiveCancel: { disposable?.cancel() })
                 .eraseToAnyPublisher()
     }
 }
