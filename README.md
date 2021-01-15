@@ -32,7 +32,7 @@ to check, use `/usr/libexec/java_home -V`
 - KMM project, with
     - iOS app
     - Android app
-    - Shared library 
+    - Shared library
 
 # Code architecture
 
@@ -94,6 +94,7 @@ Examples of classes:
 - https://github.com/prof18/MoneyFlow
 - https://github.com/Drjacky/TMDbMultiplatform
 - https://github.com/kuuuurt/jokes-app-multiplatform
+- https://github.com/joreilly/PeopleInSpace
 
 
 # Things to know
