@@ -1,19 +1,14 @@
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        google()
-        jcenter()
         mavenCentral()
-    }
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.namespace == "com.android") {
-                useModule("com.android.tools.build:gradle:4.1.1") // Keep it in sync with Versions.androidGradlePlugin
-            }
-        }
+        maven(url = "https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
+
 rootProject.name = "SpreakerKMMApp"
+
+enableFeaturePreview("GRADLE_METADATA")
 
 include(":androidApp")
 include(":shared")

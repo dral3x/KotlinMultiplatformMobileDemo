@@ -9,6 +9,24 @@ xd xcode-kotlin
 sudo ./colorsetup-xcode11.sh
 ```
 
+## Install Java 11
+```
+brew tap AdoptOpenJDK/openjdk
+brew install --cask adoptopenjdk1
+```
+to check, use `/usr/libexec/java_home -V`
+
+# Android setup
+
+Use Android Studio 2020.3.1 Canary 4
+
+## Install Java 11
+```
+brew tap AdoptOpenJDK/openjdk
+brew install --cask adoptopenjdk1
+```
+to check, use `/usr/libexec/java_home -V`
+
 # Project architecture
 
 - KMM project, with

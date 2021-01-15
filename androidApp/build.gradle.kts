@@ -30,7 +30,22 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
+        //viewBinding = true // View Binding
+        compose = true // Jetpack Compose
+    }
+
+    composeOptions {
+        kotlinCompilerVersion = Versions.kotlin
+        kotlinCompilerExtensionVersion = Versions.AndroidX.compose
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs = listOf("-Xallow-jvm-ir-dependencies", "-Xskip-prerelease-check",
+            "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi"
+        )
     }
 }
 
@@ -45,6 +60,13 @@ dependencies {
     implementation(Deps.AndroidX.lifecycleViewmodelKtx)
     implementation(Deps.material)
 
+    // UI - Jetpack Compose
+    implementation(Deps.AndroidX.Compose.ui)
+    implementation(Deps.AndroidX.Compose.uiTooling)
+    implementation(Deps.AndroidX.Compose.foundation)
+    implementation(Deps.AndroidX.Compose.material)
+    implementation(Deps.AndroidX.Compose.runtimeLivedata)
+
     // Backend
     implementation(Deps.Coroutines.core)
     implementation(Deps.Ktor.android)
@@ -54,5 +76,7 @@ dependencies {
     testImplementation(Deps.mockito)
     testImplementation(Deps.AndroidX.testing)
     testImplementation(Deps.Coroutines.test)
+
+    androidTestImplementation(Deps.AndroidX.Compose.uiTest)
 }
 

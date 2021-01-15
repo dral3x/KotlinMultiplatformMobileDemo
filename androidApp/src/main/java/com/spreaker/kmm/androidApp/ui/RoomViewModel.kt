@@ -63,18 +63,28 @@ class RoomViewModel(
             manager.observeMessageSendStateChange()
                 .collect {
                     when (it.state) {
-                        SendState.SENDING -> Log.d(
+                        SendState.SENDING -> {
+                            Log.d(
                             "RoomViewModel",
                             "Sending message ${it.message.messageId}"
-                        )
-                        SendState.SEND_SUCCESS -> Log.d(
-                            "RoomViewModel",
-                            "Message ${it.message.messageId} sent"
-                        )
-                        SendState.SEND_SUCCESS -> Log.d(
-                            "RoomViewModel",
-                            "Message ${it.message.messageId} NOT sent"
-                        )
+                            )
+                            _text.value = "Sending..."
+                        }
+
+                        SendState.SEND_SUCCESS -> {
+                            Log.d(
+                                "RoomViewModel",
+                                "Message ${it.message.messageId} sent"
+                            )
+                            _text.value = "Sent with success!"
+                        }
+                        SendState.SEND_SUCCESS -> {
+                            Log.d(
+                                "RoomViewModel",
+                                "Message ${it.message.messageId} NOT sent"
+                            )
+                            _text.value = "Unable to send message"
+                        }
                     }
                 }
         }.let { jobs.add(it) }
