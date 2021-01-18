@@ -1,4 +1,4 @@
-package com.spreaker.kmm.androidApp.ui
+package com.spreaker.kmm.androidApp.ui.room
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.spreaker.kmm.androidApp.di.InjectionCenter
-import com.spreaker.kmm.shared.data.concurrent.ensureMainScope
 import com.spreaker.kmm.shared.domain.Greeting
 import com.spreaker.kmm.shared.domain.events.SendState
 import com.spreaker.kmm.shared.domain.managers.MessageManager

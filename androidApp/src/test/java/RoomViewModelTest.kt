@@ -1,6 +1,6 @@
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.spreaker.kmm.androidApp.ui.RoomViewModel
+import com.spreaker.kmm.androidApp.ui.room.RoomViewModel
 import com.spreaker.kmm.shared.domain.managers.MessageManager
 import com.spreaker.kmm.shared.domain.models.Message
 import com.spreaker.kmm.shared.domain.repositories.MessageRepository
@@ -8,7 +8,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
