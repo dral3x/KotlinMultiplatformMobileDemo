@@ -34,7 +34,7 @@ class RoomViewModel(
     val text: LiveData<String>
         get() = _text
 
-    fun startObserving() {
+    fun onViewCreated() {
         // Always from main thread
 
         /*
@@ -89,7 +89,7 @@ class RoomViewModel(
         }.let { jobs.add(it) }
     }
 
-    fun stopObserving() {
+    fun onViewDestroyed() {
         // Always from main thread
 
         jobs.forEach { it.cancel() }

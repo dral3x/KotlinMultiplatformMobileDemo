@@ -37,11 +37,11 @@ class RoomActivity : AppCompatActivity() {
         }
 
         // Start observing changes
-        model.startObserving()
+        model.onViewCreated()
     }
 
     override fun onDestroy() {
-        model.stopObserving()
+        model.onViewDestroyed()
 
         super.onDestroy()
     }

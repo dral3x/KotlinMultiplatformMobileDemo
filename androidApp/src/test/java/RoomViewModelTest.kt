@@ -70,7 +70,7 @@ class RoomViewModelTest {
         reset(observer)
 
         // When
-        viewModel.startObserving()
+        viewModel.onViewCreated()
 
         // Then
         verify(observer).onChanged("Bye bye")

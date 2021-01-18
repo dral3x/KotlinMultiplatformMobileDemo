@@ -1,15 +1,36 @@
 package com.spreaker.kmm.androidApp.ui.recorder
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.setContent
 
 class RecorderActivity: AppCompatActivity() {
 
+    private val model: RecorderViewModel by lazy { RecorderViewModel(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            RecorderView()
+            RecorderView(model)
         }
+
+        model.onViewCreated()
+    }
+
+    override fun onDestroy() {
+        model.onViewDestroyed()
+        super.onDestroy()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        model.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 }
