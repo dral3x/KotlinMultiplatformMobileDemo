@@ -23,7 +23,7 @@ object Versions {
         const val appcompat = "1.2.0"
         const val activity = "1.1.0"
         const val constraintlayout = "2.0.4"
-        const val compose = "1.0.0-alpha09"
+        const val compose = "1.0.0-alpha10"
         const val core = "1.3.2"
         const val lifecycle = "2.2.0"
         const val test = "1.3.0"
