@@ -12,6 +12,8 @@ android {
         applicationId = "com.spreaker.kmm.androidApp"
         versionCode = 1
         versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -37,6 +39,11 @@ android {
     composeOptions {
         kotlinCompilerVersion = Versions.kotlin
         kotlinCompilerExtensionVersion = Versions.AndroidX.compose
+    }
+
+    packagingOptions {
+        excludes += "META-INF/AL2.0"
+        excludes += "META-INF/LGPL2.1"
     }
 }
 
