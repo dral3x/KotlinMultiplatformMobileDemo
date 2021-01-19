@@ -44,7 +44,7 @@ fun OpenScreenButton(text: String, onClick: () -> Unit) {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewRootView() {
     RootView({ /* ignored */ }, { /* ignored */ })

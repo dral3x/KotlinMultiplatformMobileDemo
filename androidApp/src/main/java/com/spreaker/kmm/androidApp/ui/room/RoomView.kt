@@ -38,13 +38,13 @@ fun RoomView(text: String, onSendClick: () -> Unit) {
     }
 }
 
-@Preview(name = "Initial state")
+@Preview(name = "Initial state", showBackground = true)
 @Composable
 fun PreviewRoomViewInitialState() {
     RoomView("...", { /* ignored */ })
 }
 
-@Preview(name = "Sending state")
+@Preview(name = "Sending state", showBackground = true)
 @Composable
 fun PreviewRoomViewSendingState() {
     RoomView("Sending message...", { /* ignored */ })
