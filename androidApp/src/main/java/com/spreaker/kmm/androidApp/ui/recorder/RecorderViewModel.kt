@@ -44,6 +44,7 @@ class RecorderViewModel(private val activity: Activity) {
         ActivityCompat.requestPermissions(activity, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         val accepted = if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
             isPermissionRequestAccepted(grantResults[0])
@@ -57,7 +58,7 @@ class RecorderViewModel(private val activity: Activity) {
 
         // Record to the external cache directory for visibility
         fileName = "${activity.externalCacheDir!!.absolutePath}/audio.3gp"
-        Log.i(LOG_TAG, "Recording to file ${fileName}")
+        Log.i(LOG_TAG, "Recording to file $fileName")
 
         recorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)

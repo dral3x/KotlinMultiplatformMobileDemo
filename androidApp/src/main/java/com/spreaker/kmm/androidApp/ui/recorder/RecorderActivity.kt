@@ -1,9 +1,6 @@
 package com.spreaker.kmm.androidApp.ui.recorder
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.setContent
 
